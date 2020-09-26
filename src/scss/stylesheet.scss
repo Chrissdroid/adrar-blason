@@ -9,7 +9,8 @@ $danger: #B92234;
 $light: #F8F7FF;
 $dark: #2A3147;
 
-$theme-colors: ("primary": $primary,
+$theme-colors: (
+	"primary": $primary,
 	"secondary": $secondary,
 	"success": $success,
 	"info": $info,
@@ -90,8 +91,14 @@ sans-serif,
 
 	@for $i from 1 through $nb-items {
 		@if not $class-for-IE {
-			> :nth-of-type(#{$i}) {
-				transform: rotate($rot * 1deg) translate($half-parent) rotate($rot * -1deg);
+			> .elem-#{$i} {
+				transform: rotate($rot * 1deg) translateY(-$half-parent) rotate($rot * -1deg);
+				transition: transform 2s;
+
+				&.active > * {
+					transform: scale(1.5);
+					filter: grayscale(0);
+				}
 			}
 		}
 
@@ -109,7 +116,7 @@ sans-serif,
 }
 
 .circle-container {
-	@include distribute-on-circle(12, 25em, 5em, false);
+	@include distribute-on-circle(11, 25em, 5em, false);
 }
 
 .circle-container img {
@@ -117,6 +124,8 @@ sans-serif,
 	width: 100%;
 	border-radius: 50%;
 	filter: grayscale(100%);
+	transform: scale(1);
+	transition: transform .5s, filter .5s;
 
 	&:hover {
 		filter: grayscale(0);
