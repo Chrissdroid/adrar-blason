@@ -1,24 +1,25 @@
-(function() {
-	const config = {
-		numberOfPeople: 11
-	};
+const config = {
+	numberOfPeople: 11
+};
 
-	let circleList = document.querySelectorAll('.circle-container > li');
+const circleClickHandler = e => {
+	e.preventDefault();
+	const number = parseInt(e.currentTarget.className.match(/elem-(\d+)/)[1]);
 
-	circleList.forEach(element => {
-		element.addEventListener('click', e => {
-			let target = e.currentTarget;
-			var number = parseInt(target.className.match(/elem-(\d+)/)[1]);
-
-			if (target.classList.contains('active') || !number || number > config.numberOfPeople) return;
-			[].forEach.call(circleList, el => {
-				var position = parseInt(el.className.match(/elem-(\d+)/)[1]);
-				if (position >= 1 && position <= config.numberOfPeople && position < number) {
-					el.className = el.className.replace(/elem-(\d+)/, 'elem-'+(++position));
-				}
-				el.className = el.className.replace(/\bactive\b/, '').trim();
-			});
-			target.classList = target.className.replace(/elem-(\d+)/, 'elem-1 active').trim();
-		});
+	if (e.currentTarget.classList.contains('active') || !number || number < 1 || number > config.numberOfPeople) return;
+	[].forEach.call(circleList, el => {
+		const position = parseInt(el.className.match(/elem-(\d+)/)[1]);
+		if (position <= config.numberOfPeople && position < number) {
+			el.classList.remove('elem-'+position, 'active');
+			el.classList.add('elem-'+(position+1));
+		}
+		else el.classList.remove('active');
 	});
-})();
+	e.currentTarget.classList.remove('elem-'+number);
+	e.currentTarget.classList.add('elem-1', 'active');
+};
+
+const circleList = document.querySelectorAll('.circle-container > li');
+circleList.forEach(element => {
+	element.onclick = circleClickHandler;
+});

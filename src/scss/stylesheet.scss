@@ -9,6 +9,10 @@ $danger: #B92234;
 $light: #F8F7FF;
 $dark: #2A3147;
 
+$z-index-base: 2000;
+$z-index-overlay: 2010;
+$z-index-active: 2020;
+
 $theme-colors: (
 	"primary": $primary,
 	"secondary": $secondary,
@@ -96,6 +100,8 @@ sans-serif,
 				transition: transform 2s;
 
 				&.active > * {
+					position: relative;
+					z-index: $z-index-active;
 					transform: scale(1.5);
 					filter: grayscale(0);
 				}
@@ -126,6 +132,8 @@ sans-serif,
 	filter: grayscale(100%);
 	transform: scale(1);
 	transition: transform .5s, filter .5s;
+	position: relative;
+	z-index: $z-index-base;
 
 	&:hover {
 		filter: grayscale(0);
