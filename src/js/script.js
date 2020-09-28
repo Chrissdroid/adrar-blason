@@ -2,7 +2,16 @@ const config = {
 	numberOfPeople: 11
 };
 
-const circleClickHandler = e => {
+const overlay = document.querySelector('.overlay');
+overlay.onclick = overlayClickHandler;
+
+const textBox = document.querySelector('.text-box');
+const circleList = document.querySelectorAll('.circle-container > li.item');
+circleList.forEach(element => {
+	element.onclick = circleClickHandler;
+});
+
+function circleClickHandler(e) {
 	e.preventDefault();
 	const number = parseInt(e.currentTarget.className.match(/elem-(\d+)/)[1]);
 
@@ -17,9 +26,13 @@ const circleClickHandler = e => {
 	});
 	e.currentTarget.classList.remove('elem-'+number);
 	e.currentTarget.classList.add('elem-1', 'active');
-};
+	overlay.classList.add('active');
+	textBox.classList.add('active');
+}
 
-const circleList = document.querySelectorAll('.circle-container > li');
-circleList.forEach(element => {
-	element.onclick = circleClickHandler;
-});
+function overlayClickHandler(e) {
+	e.preventDefault();
+	e.currentTarget.classList.remove('active');
+	textBox.classList.remove('active');
+	[].forEach.call(circleList, el => el.classList.remove('active'));
+}

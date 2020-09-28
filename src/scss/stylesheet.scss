@@ -7,14 +7,13 @@ $info: #0491D6;
 $warning: #D49403;
 $danger: #B92234;
 $light: #F8F7FF;
-$dark: #2A3147;
+$dark: #302C48;
 
 $z-index-base: 2000;
 $z-index-overlay: 2010;
 $z-index-active: 2020;
 
-$theme-colors: (
-	"primary": $primary,
+$theme-colors: ("primary": $primary,
 	"secondary": $secondary,
 	"success": $success,
 	"info": $info,
@@ -79,15 +78,20 @@ sans-serif,
 	box-sizing: content-box;
 	/* 3 */
 
-	>* {
+	>li.item {
 		/* 4 */
 		display: block;
 		position: absolute;
 		top: 50%;
 		left: 50%;
+
 		width: $item-size;
 		height: $item-size;
 		margin: -$half-item;
+	}
+
+	>.text-box {
+		top: 40%;
 	}
 
 	$angle: (360 / $nb-items);
@@ -95,15 +99,17 @@ sans-serif,
 
 	@for $i from 1 through $nb-items {
 		@if not $class-for-IE {
-			> .elem-#{$i} {
+			>.elem-#{$i} {
 				transform: rotate($rot * 1deg) translateY(-$half-parent) rotate($rot * -1deg);
 				transition: transform 2s;
+				z-index: 1;
 
-				&.active > * {
-					position: relative;
+				&.active {
 					z-index: $z-index-active;
-					transform: scale(1.5);
-					filter: grayscale(0);
+					>* {
+						transform: scale(1.5);
+						filter: grayscale(0);
+					}
 				}
 			}
 		}
@@ -122,7 +128,23 @@ sans-serif,
 }
 
 .circle-container {
-	@include distribute-on-circle(11, 25em, 5em, false);
+	@include distribute-on-circle(11, 10em, 5em, false);
+}
+
+@media(max-width:576px){
+	.circle-container {
+		@include distribute-on-circle(11, 15em, 5em, false);
+	}
+}
+@media(min-width:576px){
+	.circle-container {
+		@include distribute-on-circle(11, 20em, 5em, false);
+	}
+}
+@media(min-width:992px){
+	.circle-container {
+		@include distribute-on-circle(11, 25em, 5em, false);
+	}
 }
 
 .circle-container img {
@@ -132,10 +154,48 @@ sans-serif,
 	filter: grayscale(100%);
 	transform: scale(1);
 	transition: transform .5s, filter .5s;
-	position: relative;
-	z-index: $z-index-base;
 
 	&:hover {
 		filter: grayscale(0);
+	}
+}
+
+.text-box {
+	opacity:0;
+	visibility:hidden;
+	transition: visibility 0.3s ease, opacity 0.3s ease;
+	z-index: $z-index-active;
+
+	&.active {
+		visibility:visible;
+		opacity:1;
+	}
+}
+
+.overlay {
+	position: fixed;
+	/* Sit on top of the page content */
+	opacity:0;
+	visibility:hidden;
+	/* Hidden by default */
+	width: 100%;
+	/* Full width (cover the whole page) */
+	height: 100%;
+	/* Full height (cover the whole page) */
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	/* Black background with opacity */
+	z-index: $z-index-overlay;
+	/* Specify a stack order in case you're using a different order for other elements */
+	cursor: pointer;
+	/* Add a pointer on hover */
+	transition: visibility 0.3s ease, opacity 0.3s ease;
+
+	&.active {
+		visibility:visible;
+		opacity:1;
 	}
 }
