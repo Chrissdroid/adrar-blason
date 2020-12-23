@@ -27,10 +27,12 @@ function circleClickHandler(e) {
 	e.currentTarget.classList.remove('elem-'+number);
 	e.currentTarget.classList.add('elem-1', 'active');
 
-	const title = textBox.querySelector('.card-header > h2');
+	const title = textBox.querySelector('.card-header > h2 > span');
+	const name = textBox.querySelector('.card-header > h2 > small');
 	const description = textBox.querySelector('.card-body > p');
 
-	title.innerHTML = e.currentTarget.dataset.name;
+	title.innerHTML = e.currentTarget.dataset.title;
+	name.innerHTML = e.currentTarget.dataset.name;
 	description.innerHTML = e.currentTarget.dataset.description;
 	overlay.classList.add('active');
 	textBox.classList.add('active');

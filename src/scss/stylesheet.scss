@@ -153,7 +153,7 @@ sans-serif,
 	border-radius: 50%;
 	filter: grayscale(100%);
 	transform: scale(1);
-	transition: transform .2s, filter .1s;
+	transition: transform .2s, filter .5s;
 
 	&:hover {
 		filter: grayscale(0);
