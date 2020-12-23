@@ -137,17 +137,17 @@ html, body {
 
 @media(max-width:576px){
 	.circle-container {
-		@include distribute-on-circle(11, 15em, 5em, false);
+		@include distribute-on-circle(11, 15em, 3.5em, false);
 	}
 }
 @media(min-width:576px){
 	.circle-container {
-		@include distribute-on-circle(11, 20em, 5em, false);
+		@include distribute-on-circle(11, 20em, 4.5em, false);
 	}
 }
 @media(min-width:992px){
 	.circle-container {
-		@include distribute-on-circle(11, 25em, 5em, false);
+		@include distribute-on-circle(11, 25em, 5.5em, false);
 	}
 }
 
