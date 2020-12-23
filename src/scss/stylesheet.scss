@@ -128,7 +128,14 @@ sans-serif,
 }
 
 html, body {
-	min-height: 100vh
+	min-height: 100vh;
+	background-image: linear-gradient(to bottom right, $secondary -80%, $dark 60%);
+}
+
+h1.display-1 {
+	background: linear-gradient(to bottom right, $primary -80%, $light 60%) repeat, white;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .circle-container {
@@ -151,16 +158,25 @@ html, body {
 	}
 }
 
-.circle-container img {
-	display: block;
-	width: 100%;
-	border-radius: 50%;
-	filter: grayscale(100%);
-	transform: scale(1);
-	transition: transform .2s, filter .5s;
+.circle-container li {
 
-	&:hover {
-		filter: grayscale(0);
+	img {
+		display: block;
+		width: 100%;
+		border-radius: 50%;
+		filter: grayscale(100%);
+		box-shadow: 0 0 10px rgba(0, 0, 0, .75);
+		transform: scale(1);
+		transition: transform .2s, filter .5s;
+
+		&:hover {
+			filter: grayscale(0);
+		}
+	}
+
+	&:not(.active) img:hover {
+		transform: scale(1.1);
+		border: solid 2px rgba($primary, .3);
 	}
 }
 
