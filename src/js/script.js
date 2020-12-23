@@ -44,3 +44,5 @@ function overlayClickHandler(e) {
 	textBox.classList.remove('active');
 	[].forEach.call(circleList, el => el.classList.remove('active'));
 }
+
+console.log('Made with lightspeed by Alex²');
