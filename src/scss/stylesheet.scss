@@ -107,7 +107,7 @@ sans-serif,
 				&.active {
 					z-index: $z-index-active;
 					>* {
-						transform: scale(1.5);
+						transform: scale(2);
 						filter: grayscale(0);
 					}
 				}
