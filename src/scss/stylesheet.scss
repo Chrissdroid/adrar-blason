@@ -127,6 +127,10 @@ sans-serif,
 	}
 }
 
+html {
+	min-height: 100vh
+}
+
 .circle-container {
 	@include distribute-on-circle(11, 10em, 5em, false);
 }
