@@ -101,7 +101,7 @@ sans-serif,
 		@if not $class-for-IE {
 			>.elem-#{$i} {
 				transform: rotate($rot * 1deg) translateY(-$half-parent) rotate($rot * -1deg);
-				transition: transform 2s;
+				transition: transform 1.5s;
 				z-index: 1;
 
 				&.active {
@@ -153,7 +153,7 @@ sans-serif,
 	border-radius: 50%;
 	filter: grayscale(100%);
 	transform: scale(1);
-	transition: transform .5s, filter .5s;
+	transition: transform .2s, filter .1s;
 
 	&:hover {
 		filter: grayscale(0);
@@ -163,7 +163,7 @@ sans-serif,
 .text-box {
 	opacity:0;
 	visibility:hidden;
-	transition: visibility 0.3s ease, opacity 0.3s ease;
+	transition: visibility .3s ease, opacity .3s ease;
 	z-index: $z-index-active;
 
 	&.active {
@@ -192,7 +192,7 @@ sans-serif,
 	/* Specify a stack order in case you're using a different order for other elements */
 	cursor: pointer;
 	/* Add a pointer on hover */
-	transition: visibility 0.3s ease, opacity 0.3s ease;
+	transition: visibility .35s ease, opacity .35s ease;
 
 	&.active {
 		visibility:visible;

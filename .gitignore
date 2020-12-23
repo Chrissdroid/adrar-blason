@@ -118,3 +118,6 @@ out
 
 .idea
 readme.md
+
+.vscode
+*.config
