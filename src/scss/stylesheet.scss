@@ -262,8 +262,6 @@ body {
 		color: $primary;
 
 		>* {
-			margin: 0;
-			padding: 0;
 			white-space: pre;
 			min-height: 12.5px;
 
@@ -272,4 +270,8 @@ body {
 			}
 		}
 	}
+}
+
+p {
+	margin-bottom: 0 !important;
 }
