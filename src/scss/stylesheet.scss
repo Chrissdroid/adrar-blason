@@ -136,9 +136,7 @@ body {
 
 .title-box {
 	>h1 {
-		background: linear-gradient(to bottom right, $primary -80%, $light 60%) repeat, white;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+		color: $light;
 	}
 
 	>img {
@@ -146,9 +144,7 @@ body {
 	}
 
 	>small {
-		background: linear-gradient(to bottom right, $primary -80%, $light 60%) repeat, white;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+		color: $light;
 
 		padding-left: 5.5em;
 		margin-top: -1.5em;
