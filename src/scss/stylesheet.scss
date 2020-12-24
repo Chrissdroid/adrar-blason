@@ -106,6 +106,7 @@ sans-serif,
 
 				&.active {
 					z-index: $z-index-active;
+
 					>* {
 						transform: scale(2);
 						filter: grayscale(0);
@@ -127,32 +128,51 @@ sans-serif,
 	}
 }
 
-html, body {
+html,
+body {
 	min-height: 100vh;
 	background-image: linear-gradient(to bottom right, $secondary -80%, $dark 60%);
 }
 
-h1.display-1 {
-	background: linear-gradient(to bottom right, $primary -80%, $light 60%) repeat, white;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+.title-box {
+	>h1 {
+		background: linear-gradient(to bottom right, $primary -80%, $light 60%) repeat, white;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	>img {
+		width: 20em;
+	}
+
+	>small {
+		background: linear-gradient(to bottom right, $primary -80%, $light 60%) repeat, white;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+
+		padding-left: 5.5em;
+		margin-top: -1.5em;
+		font-size: 125%;
+	}
 }
 
 .circle-container {
 	@include distribute-on-circle(11, 10em, 5em, false);
 }
 
-@media(max-width:576px){
+@media(max-width:576px) {
 	.circle-container {
 		@include distribute-on-circle(11, 15em, 3.5em, false);
 	}
 }
-@media(min-width:576px){
+
+@media(min-width:576px) {
 	.circle-container {
 		@include distribute-on-circle(11, 20em, 4.5em, false);
 	}
 }
-@media(min-width:992px){
+
+@media(min-width:992px) {
 	.circle-container {
 		@include distribute-on-circle(11, 25em, 5.5em, false);
 	}
@@ -181,22 +201,22 @@ h1.display-1 {
 }
 
 .text-box {
-	opacity:0;
-	visibility:hidden;
+	opacity: 0;
+	visibility: hidden;
 	transition: visibility .3s ease, opacity .3s ease;
 	z-index: $z-index-active;
 
 	&.active {
-		visibility:visible;
-		opacity:1;
+		visibility: visible;
+		opacity: 1;
 	}
 }
 
 .overlay {
 	position: fixed;
 	/* Sit on top of the page content */
-	opacity:0;
-	visibility:hidden;
+	opacity: 0;
+	visibility: hidden;
 	/* Hidden by default */
 	width: 100%;
 	/* Full width (cover the whole page) */
@@ -215,7 +235,41 @@ h1.display-1 {
 	transition: visibility .35s ease, opacity .35s ease;
 
 	&.active {
-		visibility:visible;
-		opacity:1;
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+.item.elem-12#elem-bubble {
+	width: 10em;
+	height: 10em;
+	position: relative;
+	margin: -5em;
+	border-radius: 50%;
+	border: solid 2px rgba($primary, .3);
+	overflow: hidden;
+
+	>canvas {
+		width: 10em;
+		height: 10em;
+	}
+
+	>div {
+		position: absolute;
+		top: 12.5px;
+		left: 0;
+		font: 12.5px arial;
+		color: $primary;
+
+		>* {
+			margin: 0;
+			padding: 0;
+			white-space: pre;
+			min-height: 12.5px;
+
+			>span {
+				background-color: #000;
+			}
+		}
 	}
 }
