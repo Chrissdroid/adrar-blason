@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+$primary: #17A8FE;
+$secondary: #01496C;
+$success: #03B042;
+$info: #0491D6;
+$warning: #D49403;
+$danger: #B92234;
+$light: #F8F7FF;
+$dark: #302C48;
+
+$z-index-base: 2000;
+$z-index-overlay: 2010;
+$z-index-active: 2020;
+
+$font-family: 'Raleway', system-ui, sans-serif;
+
+/**
+ * Mixin to put items on a circle
+ * [1] - Allows children to be absolutely positioned
+ * [2] - Allows the mixin to be used on a list
+ * [3] - In case box-sizing: border-box has been enabled
+ * [4] - Allows any type of direct children to be targeted
+ * 
+ * @param {Integer} $nb-items - Number or items
+ * @param {Length} $circle-size - Container size
+ * @param {Length} $item-size - Item size
+ * @param {String | false} $class-for-IE - Base class name for old IE
+ */
+@mixin distribute-on-circle(
+	$nb-items,
+	$circle-size,
+	$item-size,
+	$class-for-IE: false
+) {
+	$half-item: ($item-size / 2);
+	$half-parent: ($circle-size / 2);
+
+	position: relative;
+	/* 1 */
+	width: $circle-size;
+	height: $circle-size;
+	padding: 0;
+	border-radius: 50%;
+	list-style: none;
+	/* 2 */
+	box-sizing: content-box;
+	/* 3 */
+
+	>li.item {
+		/* 4 */
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		width: $item-size;
+		height: $item-size;
+		margin: -$half-item;
+	}
+
+	>.text-box {
+		top: 40%;
+	}
+
+	$angle: (360 / $nb-items);
+	$rot: 0;
+
+	@for $i from 1 through $nb-items {
+		@if not $class-for-IE {
+			>.elem-#{$i} {
+				transform: rotate($rot * 1deg) translateY(-$half-parent) rotate($rot * -1deg);
+				transition: transform 1.5s;
+				z-index: 1;
+
+				&.active {
+					z-index: $z-index-active;
+
+					>* {
+						transform: scale(2);
+						filter: grayscale(0);
+					}
+				}
+			}
+		}
+
+		@else {
+			>.#{$class-for-IE}#{$i} {
+				// If CSS transforms are not supported
+				$mt: sin($rot * pi() / 180) * $half-parent - $half-item;
+				$ml: cos($rot * pi() / 180) * $half-parent - $half-item;
+				margin: $mt 0 0 $ml;
+			}
+		}
+
+		$rot: ($rot + $angle);
+	}
+}
+
+*, ::before, ::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	min-height: 100vh;
+	background-image: linear-gradient(to bottom right, $secondary -80%, $dark 60%);
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+	font-family: $font-family;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+header, main, footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	flex: 1;
+}
+
+.title-box {
+	position: relative;
+	margin-top: 2.5em;
+
+	img {
+		width: 20em;
+	}
+
+	small {
+		position: absolute;
+		color: $light;
+		text-align: center;
+
+		bottom: .55em;
+		right: .75em;
+		font-size: 125%;
+	}
+}
+
+.circle-container {
+	@include distribute-on-circle(11, 10em, 5em, false);
+}
+
+@media(max-width:576px) {
+	.circle-container {
+		@include distribute-on-circle(11, 15em, 3.5em, false);
+	}
+}
+
+@media(min-width:576px) {
+	.circle-container {
+		@include distribute-on-circle(11, 20em, 4.5em, false);
+	}
+}
+
+@media(min-width:992px) {
+	.circle-container {
+		@include distribute-on-circle(11, 25em, 5.5em, false);
+	}
+}
+
+.circle-container li {
+
+	img {
+		display: block;
+		width: 100%;
+		border-radius: 50%;
+		filter: grayscale(100%);
+		box-shadow: 0 0 10px rgba(0, 0, 0, .75);
+		transform: scale(1);
+		transition: transform .2s, filter .5s;
+
+		&:hover {
+			filter: grayscale(0);
+		}
+	}
+
+	&:not(.active) img:hover {
+		transform: scale(1.1);
+		border: solid 2px rgba($primary, .3);
+	}
+}
+
+.overlay {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden;
+
+	width: 100%;
+	height: 100%;
+
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: $z-index-overlay;
+	cursor: pointer;
+	transition: visibility .35s ease, opacity .35s ease;
+
+	&.active {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
+
+.card {
+	position: relative;
+	margin-top: 10em;
+	width: 20em;
+	min-height: 8em;
+	text-align: center;
+	pointer-events: none;
+	cursor: default;
+
+	.card-header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		animation: fadeIn;
+		animation-duration: 1s;
+		padding: 0 1em;
+		color: $light;
+		pointer-events: initial;
+		
+		h2 {
+			font-weight: normal;
+
+			>span {
+				font-weight: bold;
+			}
+		}
+
+		small {
+			font-size: 90%;
+			color: $primary;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			background-color: $dark;
+			transform: skewX(15deg);
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+		}
+	}
+
+	.card-body {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		animation: fadeIn;
+		animation-duration: 1s;
+		padding: 0 1em;
+		color: rgba($light, .85);
+		pointer-events: initial;
+
+		p {
+			margin: .75em 0;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			background-color: $dark;
+			transform: skewX(15deg);
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+		}
+	}
+
+	&.active {
+		.card-header {
+			animation: fadeInLeft;
+			animation-duration: 1s;
+		}
+
+		.card-body {
+			animation: fadeInRight;
+			animation-duration: 1s;
+		}
+	}
+}
+
+.item.elem-12#elem-bubble {
+	width: 10em;
+	height: 10em;
+	position: relative;
+	margin: -5em;
+	border-radius: 50%;
+	border: solid 2px rgba($primary, .3);
+	overflow: hidden;
+
+	>canvas {
+		width: 10em;
+		height: 10em;
+	}
+
+	>div {
+		position: absolute;
+		top: 12.5px;
+		font: 12.5px arial;
+		color: $primary;
+
+		>* {
+			white-space: pre;
+			min-height: 12.5px;
+
+			>span {
+				background-color: #000;
+			}
+		}
+	}
+}
