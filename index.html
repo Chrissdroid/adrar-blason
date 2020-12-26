@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 		integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
 		crossorigin="anonymous" />
-	<link rel="stylesheet" href="src/css/stylesheet.css">
+	<link rel="stylesheet" href="src/css/style.css">
 	<script defer src="src/js/script.min.js"></script>
 
 	<meta name="author" content="Alex²">
@@ -24,17 +24,15 @@
 </head>
 
 <body>
-	<div class="container">
-		<div class="d-flex flex-column justify-content-center align-item-center text-center py-5 title-box">
-			<!-- <h1 class="display-1 animate__animated animate__fadeInDown">Dev'engers</h1> -->
-			<img class="mx-auto animate__animated animate__fadeInDown" src="src/img/devengers.svg" alt="Dev'engers">
-			<small class="mx-auto text">Veni Vidi Codi</small>
+	<header>
+		<div class="title-box">
+			<!-- <h1 class="animate__animated animate__fadeInDown">Dev'engers</h1> -->
+			<img class="animate__animated animate__fadeInDown" src="src/img/devengers.svg" alt="Dev'engers">
+			<small id="animatedText">Veni Vidi Codi</small>
 		</div>
-	</div>
+	</header>
 
-	<div class="overlay"></div>
-
-	<div class="d-flex justify-content-center align-items-center pt-5 mt-5">
+	<main>
 		<ul class='circle-container'>
 			<li class="item elem-1"		data-title="Catcoco"		data-description=".PNG to .PHP"												data-name="Corrine"><img src='src/img/catwoman.jpg'></li>
 			<li class="item elem-2"		data-title="Byteman"		data-description="No comment"												data-name="Hugo"><img src='src/img/batman.jpg'></li>
@@ -48,7 +46,7 @@
 			<li class="item elem-10"	data-title="Htmldall"		data-description="/mute"													data-name="Florian"><img src='src/img/heimdall.jpg'></li>
 			<li class="item elem-11"	data-title="Slash"			data-description="Cpafo"													data-name="Alex"><img src='src/img/flash.jpg'></li>
 			<li class="item elem-12" id="elem-bubble">
-				<canvas id="c"></canvas>
+				<canvas id="canvas"></canvas>
 				<div>
 					<p>                <span>HTML5</span></p>
 					<p>      <span>CSS3</span>              <span>JS</span></p>
@@ -62,17 +60,25 @@
 					<p><span>BOOTSTRAP</span></p>
 				</div>
 			</li>
-			<li class="text-box card d-flex justify-content-center text-center">
-				<div class="card-header">
-					<h2 class="text-light"><span>Titre</span> - <small class="text-primary">nom</small></h2>
-				</div>
-				<div class="card-body">
-					<p>Description...</p>
-				</div>
-			</li>
 		</ul>
-	</div>
+	</main>
 
+	<footer>
+
+	</footer>
+
+	<aside class="overlay">
+		<div class="card">
+			<div class="card-header">
+				<h2>
+					<span>Titre</span> - <small>nom</small>
+				</h2>
+			</div>
+			<div class="card-body">
+				<p>Description...</p>
+			</div>
+		</div>
+	</aside>
 </body>
 
 </html>

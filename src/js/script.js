@@ -5,7 +5,7 @@ const config = {
 const overlay = document.querySelector('.overlay');
 overlay.onclick = overlayClickHandler;
 
-const textBox = document.querySelector('.text-box');
+const textBox = document.querySelector('.card');
 const circleList = document.querySelectorAll('.circle-container > li.item');
 circleList.forEach(element => {
 	element.onclick = circleClickHandler;
@@ -39,6 +39,7 @@ function circleClickHandler(e) {
 
 function overlayClickHandler(e) {
 	e.preventDefault();
+	if (e.target !== e.currentTarget) return;
 	e.currentTarget.classList.remove('active');
 	textBox.classList.remove('active');
 	[].forEach.call(circleList, el => el.classList.remove('active'));
@@ -127,7 +128,7 @@ const phrases = [
 ];
 
 
-const el = document.querySelector('.text');
+const el = document.querySelector('#animatedText');
 const fx = new TextScramble(el);
 
 let counter = 0;
@@ -141,7 +142,7 @@ const next = () => {
 setTimeout(next, 5000);
 
 // geting canvas by Boujjou Achraf
-var c = document.getElementById("c");
+var c = document.getElementById("canvas");
 var ctx = c.getContext("2d");
 
 //chinese characters - taken from the unicode charset
